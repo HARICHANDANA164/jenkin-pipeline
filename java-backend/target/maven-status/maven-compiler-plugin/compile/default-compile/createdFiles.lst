@@ -1,0 +1,3 @@
+com\cve\controller\CveController.class
+com\cve\CveApplication.class
+com\cve\service\PredictionService.class
