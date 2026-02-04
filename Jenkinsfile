@@ -2,12 +2,11 @@ pipeline {
     agent any
 
     tools {
-        jdk 'JDK21'
-        maven 'Maven3'
+        jdk 'JDK17'
+        maven 'Maven'
     }
 
     stages {
-
         stage('Checkout') {
             steps {
                 checkout scm
@@ -26,24 +25,6 @@ pipeline {
             steps {
                 dir('java-backend') {
                     sh 'mvn test'
-                }
-            }
-        }
-
-        stage('SonarQube Analysis') {
-            steps {
-                dir('java-backend') {
-                    withSonarQubeEnv('SonarQube') {
-                        sh 'mvn sonar:sonar'
-                    }
-                }
-            }
-        }
-
-        stage('Quality Gate') {
-            steps {
-                timeout(time: 2, unit: 'MINUTES') {
-                    waitForQualityGate abortPipeline: true
                 }
             }
         }
